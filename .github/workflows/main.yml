@@ -1,0 +1,37 @@
+name: tanlang008
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: tanlang008-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  jable3:
+    runs-on: ubuntu-22.04
+    strategy:
+      max-parallel: 15
+      fail-fast: false
+      matrix:
+        pages: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84]
+
+    steps:
+      - name: clone1
+        uses: actions/checkout@v4
+
+      - name: sshx123
+        run: |
+          curl -sSf https://sshx.io/get | sh 
+          sshx &
+
+      - name: download111
+        run: |
+          docker run -d -p 7860:7860 -e PAGE=${{matrix.pages}} --name av --platform=linux/amd64 registry.hf.space/tanlang008-video:latest
+      - name: LOG1
+        run: |
+          timeout -k 2s 5.5h docker logs -f av
+  
+      
+
+
