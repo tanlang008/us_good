@@ -14,7 +14,7 @@ jobs:
       max-parallel: 15
       fail-fast: false
       matrix:
-        pages: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84]
+        pages: [55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
 
     steps:
       - name: clone1
@@ -27,7 +27,7 @@ jobs:
 
       - name: download111
         run: |
-          docker run -d -p 7860:7860 -e PAGE=${{matrix.pages}} --name av --platform=linux/amd64 registry.hf.space/tanlang008-love:latest
+          docker run -d -p 7860:7860 -e PAGE=${{matrix.pages}} --name av --platform=linux/amd64 registry.hf.space/tanlang008-video:latest
       - name: LOG1
         run: |
           timeout -k 2s 5.5h docker logs -f av
