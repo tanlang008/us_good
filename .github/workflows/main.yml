@@ -27,7 +27,7 @@ jobs:
 
       - name: download111
         run: |
-          docker run -d -p 7860:7860 -e PAGE=${{matrix.pages}} --name av --platform=linux/amd64 registry.hf.space/tanlang008-video:latest
+          docker run -d -p 7860:7860 -e PAGE=${{matrix.pages}} --name av --platform=linux/amd64 registry.hf.space/tanlang008-love:latest
       - name: LOG1
         run: |
           timeout -k 2s 5.5h docker logs -f av
