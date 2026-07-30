@@ -1,7 +1,36 @@
+version: "3.8"
+
+# 共用网桥网络，等价 --network net
+networks:
+  net:
+    driver: bridge
+
 services:
-  debian-desktop:
-    image: lscr.io/linuxserver/webtop:debian-xfce
-    container_name: debian_gui
-    privileged: true
+  # cloudflare 隧道
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    networks:
+      - net
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+      - eyJhIjoiNWVkOTI5OGJjNTgyZWZiOWVjNDRiZjAzYWQ2ZDEzNTkiLCJ0IjoiZTM2MWI4N2MtMDYyYS00M2Q1LWI1NzEtY2ZlNGI3ODg0NTA1IiwicyI6Ik0ySTNPVE16TkRndFlqbGpPQzAwWVdGa0xUa3dPVFV0T0dKaU9UUTRZVEptTkRZeSJ9
+
+  # 3x-ui 面板
+  3x-ui:
+    image: ghcr.io/mhsanaei/3x-ui:latest
+    container_name: friendly_ishizaka
+    restart: unless-stopped
+    networks:
+      - net
+    # 可选：持久化数据（推荐，否则重启配置丢失）
+    volumes:
+      - ./3x-ui-data:/etc/x-ui
+    # 如需主机端口映射放开下面，默认面板端口 2095
     ports:
-      - '6080:3000'
+      - "2053:2053"
+      - "8888:8888"
